@@ -1,4 +1,4 @@
-# AEROSPACE CORE v23.4: Lunar Expedition Simulator 🚀
+# AEROSPACE CORE v23.4: Lunar Expedition Simulator
 
 **Lead Engineer:** Mateo Martínez  
 **Project Status:** `OPERATIONAL`  
