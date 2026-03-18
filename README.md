@@ -78,7 +78,7 @@ This is a zero-dependency, single-file production build.
     ```bash
     git clone [https://github.com/youruser/aerospace-core.git](https://github.com/youruser/aerospace-core.git)
     ```
-2.  Open `index.html` in any modern, WebGL-enabled browser.
+2.  Open `aerospace-core-v25.1.0.html` in any modern, WebGL-enabled browser.
 
 ---
 
