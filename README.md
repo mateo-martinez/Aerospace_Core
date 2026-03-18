@@ -1,96 +1,89 @@
-# AEROSPACE CORE v23.4: Lunar Expedition Simulator
+# 🚀 AEROSPACE CORE v25.1.0: LUNAR ASCENDANT
 
-**Lead Engineer:** Mateo Martínez  
-**Project Status:** `OPERATIONAL`  
-**Mission Phase:** Surface Exploration (MSE-1)  
-**License:** [AGPL-3.0](https://opensource.org/licenses/AGPL-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-00f2ff.svg)](https://opensource.org/licenses/MIT)
+[![Engine: Three.js](https://img.shields.io/badge/Engine-Three.js%20r128-00ff88)](https://threejs.org/)
+[![Type: Aerospace Simulation](https://img.shields.io/badge/Sector-Aerospace%20%26%20Defense-ff3333)](https://github.com/)
 
----
-
-## 1. Project Overview
-**AEROSPACE CORE** is a high-fidelity, browser-based orbital mechanics and lunar landing simulator developed using **Three.js** and vanilla JavaScript. The project simulates a multi-stage mission from Earth liftoff to the deployment of a **Mobile Surface Explorer (MSE-1)** rover on the Lunar South Pole.
-
-The simulator utilizes a custom physics engine to calculate gravitational vectors, orbital velocities, and TLI (Trans-Lunar Injection) trajectories in real-time.
+**AEROSPACE CORE** is a high-fidelity, browser-based orbital mechanics simulator and mission control interface. Designed by an Expert Aerospace & Full-Stack Systems Engineer, this platform bridges the gap between complex physical calculations and high-performance "Cyber-Aero" UI/UX.
 
 ---
 
-## 2. Technical Architecture
+## 🛠 Feature Manifest
 
-### 2.1 Physics Engine & Scaling
-To maintain visual coherence while respecting astronomical proportions, the system uses a dual-scale approach:
-* **Distance Scaling:** $1 \text{ Unit} = 15,000 \text{ km}$
-* **Time Scaling:** Variable via the **Warp Drive** (1x to 1500x)
-* **Gravitational Constants:**
-    * Earth ($GM_E$): $398,600 \text{ km}^3/\text{s}^2$
-    * Moon ($GM_M$): $4,902 \text{ km}^3/\text{s}^2$
-    * Earth Radius ($R_E$): $6,371 \text{ km}$
-    * Moon Radius ($R_M$): $1,737 \text{ km}$
+### 🪐 Orbital & Celestial Mechanics
+* **Multi-Mission Logic:** Integrated support for LEO (400km), MEO (20,200km), GEO (35,786km), and Artemis-style Lunar trajectories.
+* **N-Body Approximation:** Real-time Earth/Moon gravity modeling including Sphere of Influence (SOI) transition and Lunar capture.
+* **Navigation Landmarks:** Dynamic visualization of Lagrange Points (L1, L2, L4, L5), the Karman Line, and the Van Allen Radiation Belts.
+* **Trajectory Tracking:** Long-exposure orbital path rendering (1,000,000-point buffer).
 
-### 2.2 Numerical Integration
-The engine uses **Euler Integration** with a sub-stepping protocol ($50 \text{ iterations per frame}$) to ensure stability during high-velocity transits and high Warp Drive settings.
-$$\vec{a} = \sum \frac{-GM}{r^2} \cdot \hat{r}$$
-$$\vec{v}_{t+1} = \vec{v}_t + \vec{a} \cdot \Delta t$$
+### 🚀 Hardware & Mission Library
+* **Launch Vehicles:**
+    * **SpaceX Falcon 9:** Reusable medium-lift for LEO/Starlink missions.
+    * **SpaceX Starship:** Super-heavy lift for deep-space and lunar landing.
+    * **NASA SLS Block 1:** Deep-space exploration platform for the Orion MPCV.
+* **Payloads:** Real-world technical specifications for **Starlink V2**, **GPS III**, **ViaSat-3**, and **Artemis III** mission profiles.
 
-### 2.3 Lunar Capture Logic (SOI)
-The simulator implements an aggressive **Sphere of Influence (SOI)** capture. When the craft enters the $120,000 \text{ km}$ Lunar radius, the guidance system transitions from Earth-centric to Lunar-centric, applying an artificial gravity assist to ensure capture even at sub-optimal intercept angles.
-
----
-
-## 3. Mission Phases & Operating Manual
-
-### Phase 1: Pre-Launch (T-10 Sequence)
-Upon initiating the sequence, the system performs a 10-second automated check of all subsystems.
-* **T-10:** Internal Power Switch.
-* **T-7:** Flight computer startup.
-* **T-3:** Engine ignition sequence start.
-
-### Phase 2: Ascent & Orbital Insertion
-The craft climbs to a $400 \text{ km}$ LEO (Low Earth Orbit).
-* **Action:** Monitor logs for "Atmospheric Exit."
-* **Requirement:** Velocity must stabilize at $\approx 7.6 \text{ km/s}$ before Staging.
-
-### Phase 3: Trans-Lunar Injection (TLI)
-The most critical burn. The system calculates a Hohmann-like transfer trajectory.
-* **Action:** Execute TLI Burn.
-* **Safety:** Do not exceed 1000x Warp during transit to avoid "collision tunneling" through the Lunar mesh.
-
-### Phase 4: Lunar Descent & Touchdown
-The craft detects the Lunar surface at $1 \text{ km}$ altitude.
-* **Landing Criteria:** Relative velocity must reach $0.000 \text{ km/s}$.
-* **Status:** `LANDED` indicator will turn green, unlocking Rover deployment.
-
-### Phase 5: Surface Exploration (MSE-1)
-Deploy the Rover to begin resource scanning.
-* **Sensors:** Helium-3 and Water Ice spectrometer active.
-* **Data:** Logs will report geological anomalies and deposit coordinates in real-time.
+### 🎮 Mission Control (HUD)
+* **Real-Time Telemetry:** NASA-SPEC tracking of relative velocity (KM/S), phase angles, and lunar range.
+* **Automated TLI Window:** Physics-driven Trans-Lunar Injection calculator using a 0.65 rad phase angle lock for precise lunar intercept.
+* **Surface Operations:** Deployable **MSE-1 Rover** with autonomous resource scanning for Helium-3 and Water Ice.
 
 ---
 
-## 4. Key Features
-* **Deep Space Network (DSN) Verbose Logs:** Real-time telemetry reporting in standard NASA/SpaceX English terminology.
-* **Lagrange Point Visualization:** Real-time calculation of L1, L2, L4, and L5 stability wells between Earth and Moon.
-* **AES-256 Telemetry Encryption:** Simulated secure data link for mission integrity.
-* **Trajectory FDR (Flight Data Recorder):** Visual path tracing of the entire mission profile.
+## ⚙️ Technical Specifications
 
----
+### Physics Kernel
+The simulation utilizes a sub-stepped Euler integration method ($n=60$) to ensure trajectory stability during high-speed time warping.
 
-## 5. Controls & HUD
-| Component | Function |
+| Parameter | Value |
 | :--- | :--- |
-| **Mission Ops Panel** | Sequential control of flight stages (1-5). |
-| **Warp Slider** | Controls simulation speed (Time Compression). |
-| **Telemetry Panel** | Real-time monitoring of Distance, Velocity, and Resource Scan %. |
-| **OrbitControls** | Mouse Left (Rotate), Mouse Right (Pan), Scroll (Zoom). |
+| **Earth Gravity ($GM_E$)** | $398,600 km^3/s^2$ |
+| **Lunar Gravity ($GM_M$)** | $4,902 km^3/s^2$ |
+| **Distance Scaling** | $1:15,000$ |
+| **Escape Velocity ($V_e$)** | $\approx 10.9 km/s$ (for TLI) |
+| **Simulation Warp** | 1x to 2500x Acceleration |
+
+### Tech Stack
+* **Core:** Vanilla JavaScript (ES6+)
+* **Graphics:** WebGL via **Three.js r128**
+* **Controls:** OrbitControls.js
+* **Typography:** JetBrains Mono (Standardized HUD font)
 
 ---
 
-## 6. Installation
+## 🕹 Operation Manual
+
+### 1. Mission Configuration
+Select your **Launch Vehicle** and **Payload** from the sidebar. Each selection updates the internal flight computer with the correct `targetOrbitAlt`. Click on the hardware names to view live NASA/SPX specification logs.
+
+### 2. Launch Sequence
+Execute the **Pre-Flight Diagnostic**. Once "MISSION GO" is confirmed, initiate the **T-10 Sequence**. The core handles the gravity turn automatically until target altitude is reached.
+
+### 3. Deployment
+Once in a stable orbit (LEO/MEO/GEO), perform **Stage Separation** and **Solar Bus Deployment**. Deploying panels is critical for maintaining bus voltage during deep space transit.
+
+### 4. Trans-Lunar Injection (TLI)
+For Lunar missions, click **"Arm Auto-TLI Burn"**. The Guidance computer calculates the phase angle relative to the Moon's orbital position. The system will auto-ignite at the optimal window to ensure capture.
+
+### 5. Lunar Surface
+Upon touchdown, release the **MSE-1 Rover**. Monitor battery levels while scanning for Helium-3 and Water Ice resources.
+
+---
+
+## 📂 Installation & Deployment
+
+This is a zero-dependency, single-file production build.
+
 1.  Clone the repository:
     ```bash
-    git clone [https://github.com/your-username/aerospace-core.git](https://github.com/your-username/aerospace-core.git)
+    git clone [https://github.com/youruser/aerospace-core.git](https://github.com/youruser/aerospace-core.git)
     ```
-2.  Open `index.html` in any modern web browser (Chrome/Edge recommended).
-3.  Ensure an active internet connection for the Three.js CDN and texture assets.
+2.  Open `index.html` in any modern, WebGL-enabled browser.
 
 ---
-**"Per Aspera ad Astra."** *Developed for the exploration of new frontiers.*
+
+## ⚖️ License
+Distributed under the MIT License. See `LICENSE` for more information.
+
+---
+**Mission Status: Nominal.**
