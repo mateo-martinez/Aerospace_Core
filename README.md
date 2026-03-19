@@ -4,7 +4,7 @@
 [![Engine: Three.js](https://img.shields.io/badge/Engine-Three.js%20r128-00ff88)](https://threejs.org/)
 [![Type: Aerospace Simulation](https://img.shields.io/badge/Sector-Aerospace%20%26%20Defense-ff3333)](https://github.com/)
 
-**AEROSPACE CORE** is a high-fidelity, browser-based orbital mechanics simulator and mission control interface. Designed by an Expert Aerospace & Full-Stack Systems Engineer, this platform bridges the gap between complex physical calculations and high-performance "Cyber-Aero" UI/UX.
+**AEROSPACE CORE** is a high-fidelity, browser-based orbital mechanics simulator and mission control interface. This platform bridges the gap between complex physical calculations and high-performance "Cyber-Aero" UI/UX.
 
 ---
 
